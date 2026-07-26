@@ -15,9 +15,14 @@ function useGetAllJobs() {
       setLoading(true);
       setError(null);
       try {
+        const token = localStorage.getItem('token');
+
         const res = await axios.get(
           `${JOB_API_ENDPOINT}/get?keyword=${searchedQuery}`,
           {
+            headers:{
+              'Authorization': `Bearer ${token}`
+            },
             withCredentials: true,
           },
         );
@@ -25,7 +30,7 @@ function useGetAllJobs() {
         console.log("First Job", res.data.jobs[0]);
         console.log("createdAt", res.data.jobs[0]?.createdAt);
 
-        if (res.data.success) {
+        if (res.data.status) {
           dispatch(setAllJobs(res.data.jobs));
         } else {
           setError("Failed to fetch jobs.");
