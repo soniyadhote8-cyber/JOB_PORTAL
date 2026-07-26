@@ -25,7 +25,7 @@ function useGetAllJobs() {
         console.log("First Job", res.data.jobs[0]);
         console.log("createdAt", res.data.jobs[0]?.createdAt);
 
-        if (res.data.status) {
+        if (res.data.success) {
           dispatch(setAllJobs(res.data.jobs));
         } else {
           setError("Failed to fetch jobs.");
