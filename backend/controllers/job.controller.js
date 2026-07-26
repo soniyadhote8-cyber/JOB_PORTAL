@@ -64,12 +64,12 @@ export const getAllJobs = async (req, res) => {
         }).sort({createdAt:-1});
 
         if (!jobs) {
-            return res.status(404).json({ message: "No jobs found", status: false })
+            return res.status(404).json({ message: error.message, status: false })
         }
         return res.status(200).json({ jobs, status: true })
     } catch (error) {
         console.error(error)
-        return res.status(500).json({ message: "Server Error", status: false })
+        return res.status(500).json({ message: "", status: false })
 
     }
 };
