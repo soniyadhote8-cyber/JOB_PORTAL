@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-    origin: ["http://localhost:5173", "https//job-portal-frontend-eight-iota.vercel.app"],
+    origin: ["http://localhost:5173", "https://job-portal-frontend-eight-iota.vercel.app"],
     credentials: true,
 
 }
