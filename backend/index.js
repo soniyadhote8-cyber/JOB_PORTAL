@@ -13,23 +13,36 @@ dotenv.config({});
 
 const app = express();
 
-// //middleware
+
+//middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieFormatter()); 
+app.use(cookieParser());
 
-app.use(cors({ origin: true, credentials: true }));
-app.options('*', cors({ origin: true, credentials: true }));
+
+const corsOptions = {
+    origin: ["http://localhost:5173", "https://job-portal-frontend-eight-iota.vercel.app"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+
+}
+app.use(cors(corsOptions));
+
 
 const PORT = process.env.PORT || 5001;
 
-// //api's
-app.use("/api/user", userRoute);
-app.use("/api/company", companyRoute);
-app.use("/api/job", jobRoute);
-app.use("/api/application", applicationRoute);
+//api's
+
+app.use("/api/user", userRoute)
+app.use("/api/company",companyRoute);
+app.use("/api/job",jobRoute);
+app.use("/api/application",applicationRoute);
+
+//-------------------code for deployment-------------
+
 
 app.listen(PORT, () => {
     connectDB();
-    console.log(`Server running at port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
