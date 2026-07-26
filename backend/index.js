@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https//job-portal-frontend-eight-iota.vercel.app"],
     credentials: true,
 
 }
@@ -38,13 +38,7 @@ app.use("/api/job",jobRoute);
 app.use("/api/application",applicationRoute);
 
 //-------------------code for deployment-------------
-if(process.env.NODE_ENV === "production") {
-    const dirpath = path.resolve();
-    app.use(express.static('./frontend/dist'));
-    app.get('/*',(req,res)=>{
-        res.sendFile(path.resolve(dirpath,'./frontend/dist','index.html'))
-    });
-}
+
 
 app.listen(PORT, () => {
     connectDB();
